@@ -1,0 +1,66 @@
+html, body {
+    margin: 0;
+    padding:0;
+}
+
+#sidebar {
+    position:absolute;
+    top:0;
+    width:171px;
+    bottom:0;
+    border-right:1px solid #CCC;
+
+    font-size:10pt;
+    padding-left:8px;
+}
+
+#sidebar h1 {
+    text-align:center;
+    font-size:130%;
+}
+
+#logo {
+    margin: 25px 0 5px;
+    padding: 5px;
+    text-align: center;
+    width: 150px;
+}
+
+#logo img {
+    border: 5px solid #D00;
+}
+
+#map {
+    position:absolute;
+    top:0;
+    left:180px;
+    right:0;
+    margin: 0;
+    bottom:0;
+}
+
+#permalink {
+    background: none repeat scroll 0 0 #FFFFFF;
+    bottom: 0;
+    font-size: 12px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    z-index: 10000;
+}
+
+#sidebartoggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    font-size:8pt;
+}
+
+.olImageLoadError {
+    display: none;
+}
+.olControlPanZoomBar {
+    top:20px !important;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>OpenFireMap</title>
+    <meta name="author" content="Christopher Hofmann <cwh@webeve.de>">
+    <link rel="stylesheet" type="text/css" href="openfiremap.css"/>
+    <script src="openlayers/OpenLayers.js"></script>
+    <script src="m/jquery-1.7.2.min.js"></script>
+    <script src="openfiremap.js"></script>
+    <script>
+      function mapInit() {
+        map = createMap('map');
+        map.events.register("moveend", map, updateExportlink);
+        updateExportlink();
+      }
+
+      function updateExportlink(event) {
+        $("#exportlinkanchor").attr("href",
+          'data.php?BBOX=' + map.getExtent().transform(map.projection,
+          map.displayProjection).toBBOX() );
+      }
+
+      function instSidebarToggle() {
+        $('#sidebartoggle').toggle(
+          function() { $('#map').css('left', '0'); map.updateSize() },
+          function() { $('#map').css('left', '180px'); map.updateSize() }
+        );
+      }
+
+      $(document).ready(mapInit);
+      $(document).ready(instSidebarToggle);
+    </script>
+
+    <script>
+/*
+      $('locate').onclick = function() {
+	geolocate.deactivate();
+	 $('track').checked = false;
+	 geolocate.watch = false;
+	  geolocate.activate();
+      };
+
+function updateLocation() {
+var lonlat = unproj(map.getCenter());
+var zoom = map.getZoom();
+var layers = getMapLayers();
+var extents = unproj(map.getExtent());
+var expiry = new Date();
+var objtype;
+var objid;
+updatelinks(lonlat.lon, lonlat.lat, zoom, layers, extents.left, extents.bottom, extents.right, extents.top, objtype, objid);
+expiry.setYear(expiry.getFullYear() + 10);
+document.cookie = "_osm_location=" + lonlat.lon + "|" + lonlat.lat + "|" + zoom + "|" + layers + "; expires=" + expiry.toGMTString();
+} 
+
+	var geolocate = new OpenLayers.Control.Geolocate({
+	    bind: false,
+	    geolocationOptions: {
+	    enableHighAccuracy: false,
+	    maximumAge: 0,
+	    timeout: 7000
+	  }
+	});
+*/
+    </script>
+  </head>
+  <body>
+    <div id="sidebar">
+      <div id="logo">
+        <img src="./ofm-logo.png"/>
+        <h1>OpenFireMap</h1>
+      </div>
+      Read <a href="http://wiki.openstreetmap.org/wiki/DE:OpenFireMap">our page in OpenStreetMap Wiki</a> for more information.
+      <!-- <button id="locate">Locate me!</button><input type="checkbox" name="track" id="track"> -->
+    </div>
+    <div id="map">
+      <button id="sidebartoggle">Sidebar</button>
+      <div id="permalink">
+        <a href="/" id="permalinkanchor">Permalink</a>
+        <a href="/" id="exportlinkanchor">Export as KML</a>
+      </div>
+    </div>
+  </body>
+</html>
