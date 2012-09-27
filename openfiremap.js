@@ -3,6 +3,7 @@ function createMap(container) {
         controls: [
             new OpenLayers.Control.ArgParser(),
 	    new OpenLayers.Control.Navigation(),
+	    new OpenLayers.Control.Attribution(),
 	    new OpenLayers.Control.PanZoomBar(),
 	    new OpenLayers.Control.LayerSwitcher(),
 	    new OpenLayers.Control.ScaleLine(),
@@ -33,6 +34,17 @@ function createMap(container) {
     
     map.addLayer(new OpenLayers.Layer.OSM("Fire hydrants","http://openfiremap.org/hytiles/${z}/${x}/${y}.png",
 	                                  { numZoomLevels: 18, transitionEffect: 'resize', alpha: true, isBaseLayer: false }));
+
+    mqURLsOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.jpg",
+                 "http://otile2.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.jpg",
+                 "http://otile3.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.jpg",
+                 "http://otile4.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.jpg"];
+
+    map.addLayer(new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", mqURLsOSM,
+			                  { transitionEffect: 'resize',
+					    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">' +
+	                                       'MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">' }));
+
 
     var hydrantStyles = new OpenLayers.StyleMap({ 
         externalGraphic: "icons/hydrant_u_17.png",
